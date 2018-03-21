@@ -13,14 +13,12 @@ import android.widget.TextView;
 
 import com.example.android.fragmentsapp.R;
 
-//import com.example.android.fargments.R;
-
 public class MainActivity extends AppCompatActivity
         implements DetailFragment.FragmentListener {
 
+    private static final String TAG = "MainActivity";
     private boolean mTablet;
     private ViewGroup fragmentContainer;
-    public static final String TAG = "MainActivity-";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +33,8 @@ public class MainActivity extends AppCompatActivity
         TextView tvOut = (TextView) findViewById (R.id.textOut);
         tvOut.setText ("Fragments side-by-side? " + mTablet);
 
-        FloatingActionButton fab = findViewById (R.id.fab);
-
+        FloatingActionButton fab = (FloatingActionButton) findViewById (R.id.fab);
         assert fab != null;
-
         fab.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View view) {
@@ -46,14 +42,14 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-
     }
 
     private void viewDetailFragment() {
 
         if (mTablet) {
-            FragmentManager fragmentManager = getSupportFragmentManager ();
-            DetailActivityFragment fragment = new DetailActivityFragment ();
+            FragmentManager fragmentManager =
+                    getSupportFragmentManager ();
+            DetailFragment fragment = new DetailFragment ();
             fragmentManager.beginTransaction ()
                     .add (R.id.detail_fragment_container, fragment)
                     .commit ();
@@ -62,11 +58,17 @@ public class MainActivity extends AppCompatActivity
             startActivity (intent);
         }
 
-
     }
 
     @Override
     public void onFragmentFinish(String firstName, String lastName, int age) {
-        Log.i (TAG, "onFragmentFinish: " + firstName + "," + lastName + "," + age);
+        Log.i (TAG, "onFragmentFinish: " + firstName + ", "
+                + lastName + ", " + age);
+
+        DetailFragment fragment = (DetailFragment) getSupportFragmentManager ().findFragmentById (R.id.detail_fragment_container);
+        getSupportFragmentManager ()
+                .beginTransaction ()
+                .remove (fragment)
+                .commit ();
     }
 }

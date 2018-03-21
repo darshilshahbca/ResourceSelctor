@@ -9,7 +9,6 @@ import android.view.View;
 
 import com.example.android.fragmentsapp.R;
 
-
 public class DetailActivity extends AppCompatActivity {
 
     @Override
@@ -18,7 +17,6 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
     }
 
 }

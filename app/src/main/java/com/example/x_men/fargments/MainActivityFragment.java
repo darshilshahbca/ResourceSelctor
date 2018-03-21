@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import com.example.android.fragmentsapp.R;
 
-
 /**
  * A placeholder fragment containing a simple view.
  */

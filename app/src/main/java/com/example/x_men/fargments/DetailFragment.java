@@ -23,7 +23,7 @@ public class DetailFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        if (!(context instanceof FragmentListener)) throw new AssertionError ();
+        if (!(context instanceof FragmentListener)) throw new AssertionError();
         mListener = (FragmentListener) context;
     }
 
@@ -48,9 +48,19 @@ public class DetailFragment extends Fragment {
 
     private void done() {
 
+        if(mListener == null){
+            throw new AssertionError ();
+        }
+
+        String firstName = textFirstName.getText ().toString ();
+        String lastName = textLastName.getText ().toString ();
+        int age = Integer.valueOf (textAge.getText ().toString ());
+
+        mListener.onFragmentFinish (firstName, lastName, age);
+
     }
 
-    public interface FragmentListener{
+    public interface FragmentListener {
         void onFragmentFinish(String firstName, String lastName, int age);
     }
 
