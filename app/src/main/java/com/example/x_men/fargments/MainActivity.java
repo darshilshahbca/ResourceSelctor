@@ -46,10 +46,13 @@ public class MainActivity extends AppCompatActivity
 
     private void viewDetailFragment() {
 
+        Person person = new Person ("Darshil", "Shah", 25);
+
+
         if (mTablet) {
             FragmentManager fragmentManager =
                     getSupportFragmentManager ();
-            DetailFragment fragment = new DetailFragment ();
+            DetailFragment fragment = DetailFragment.newInstance (person);
             fragmentManager.beginTransaction ()
                     .add (R.id.detail_fragment_container, fragment)
                     .commit ();

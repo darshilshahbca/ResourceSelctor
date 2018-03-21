@@ -1,6 +1,9 @@
 package com.example.x_men.fargments;
 
-public class Person {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Person implements Parcelable {
     private String firstName;
     private String lastName;
     private int age;
@@ -38,4 +41,34 @@ public class Person {
     public void setAge(int age) {
         this.age = age;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString (this.firstName);
+        dest.writeString (this.lastName);
+        dest.writeInt (this.age);
+    }
+
+    protected Person(Parcel in) {
+        this.firstName = in.readString ();
+        this.lastName = in.readString ();
+        this.age = in.readInt ();
+    }
+
+    public static final Parcelable.Creator<Person> CREATOR = new Parcelable.Creator<Person> () {
+        @Override
+        public Person createFromParcel(Parcel source) {
+            return new Person (source);
+        }
+
+        @Override
+        public Person[] newArray(int size) {
+            return new Person[size];
+        }
+    };
 }
