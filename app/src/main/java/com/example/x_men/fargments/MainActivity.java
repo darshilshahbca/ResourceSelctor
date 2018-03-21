@@ -61,9 +61,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onFragmentFinish(String firstName, String lastName, int age) {
-        Log.i (TAG, "onFragmentFinish: " + firstName + ", "
-                + lastName + ", " + age);
+    public void onFragmentFinish(Person person) {
+        Log.i (TAG, "onFragmentFinish: " + person.getFirstName () + ", "
+                + person.getLastName () + ", " + person.getAge ());
 
         DetailFragment fragment = (DetailFragment) getSupportFragmentManager ().findFragmentById (R.id.detail_fragment_container);
         getSupportFragmentManager ()
